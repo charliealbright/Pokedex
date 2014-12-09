@@ -1,12 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="50dp">
+
+    <TextView
+        android:id="@+id/pokedexNumber"
+        android:layout_width="75dp"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_vertical"
+        android:text="#001"
+        android:textSize="12pt"/>
 
     <ImageView
         android:id="@+id/sprite"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        />
+        android:layout_alignParentRight="true"
+        android:src="@drawable/small_1"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_toEndOf="@id/pokedexNumber"
+        android:layout_toRightOf="@id/pokedexNumber"
+        android:layout_toLeftOf="@id/sprite"
+        android:gravity="center_vertical"
+        android:text="Bulbasaur"
+        android:textSize="12pt"/>
 
 </RelativeLayout>
