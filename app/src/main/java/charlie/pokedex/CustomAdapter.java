@@ -21,7 +21,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
     private ArrayList data;
     private static LayoutInflater inflater = null;
     public Resources res;
-    private PokedexListItem listItem = null;
+    private PokedexListItem tempListItem = null;
 
     public CustomAdapter(Activity activity, ArrayList data, Resources res) {
         this.activity = activity;
@@ -59,11 +59,54 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        View view = convertView;
+        ViewHolder holder;
+
+        if (convertView == null) {
+            view = inflater.inflate(R.layout.pokedex_list_item, null);
+
+            holder = new ViewHolder();
+            holder.sprite = (ImageView)view.findViewById(R.id.sprite);
+            holder.pokemonName = (TextView)view.findViewById(R.id.pokemonName);
+            holder.pokedexID = (TextView)view.findViewById(R.id.pokedexID);
+
+            view.setTag(holder);
+        } else {
+            holder = (ViewHolder)view.getTag();
+        }
+
+        if (data.size() <= 0) {
+            holder.pokemonName.setText("No Data");
+        } else {
+            tempListItem = null;
+            tempListItem = (PokedexListItem)data.get(position);
+
+            holder.pokemonName.setText(tempListItem.getPokemonName());
+            holder.pokedexID.setText(tempListItem.getPokedexLabel());
+            holder.sprite.setImageResource(res.getIdentifier("small_" + tempListItem.getPokedexID(), "drawable", "charlie.pokedex"));
+
+            view.setOnClickListener(new OnItemClickListener(position));
+        }
+        return view;
     }
 
     @Override
     public void onClick(View v) {
 
+    }
+
+    private class OnItemClickListener implements View.OnClickListener {
+
+        private int mPosition;
+
+        OnItemClickListener(int position) {
+            mPosition = position;
+        }
+
+        @Override
+        public void onClick(View v) {
+            MainActivity ma = (MainActivity)activity;
+            //ma.onItemClick(mPosition);
+        }
     }
 }
