@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,11 @@ public class MainActivity extends ActionBarActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    public void onItemClick(int mPosition) {
+        PokedexListItem temp = (PokedexListItem)pokedex.get(mPosition);
+        Toast.makeText(activity, temp.getPokemonName() + " clicked!", Toast.LENGTH_SHORT).show();
     }
 
     @Override

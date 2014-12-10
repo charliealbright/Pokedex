@@ -106,7 +106,7 @@ public class CustomAdapter extends BaseAdapter implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             MainActivity ma = (MainActivity)activity;
-            //ma.onItemClick(mPosition);
+            ma.onItemClick(mPosition);
         }
     }
 }
