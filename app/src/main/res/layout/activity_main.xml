@@ -35,13 +35,23 @@
         android:layout_height="match_parent"
         android:layout_below="@id/navbar"
         android:gravity="center"
-        android:visibility="gone"
         android:background="#66000000">
 
         <ProgressBar
+            android:id="@+id/loadingIcon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true" />
+            android:layout_height="200dp"
+            android:indeterminate="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_toRightOf="@id/loadingIcon"
+            android:layout_toEndOf="@id/loadingIcon"
+            android:layout_marginLeft="20dp"
+            android:gravity="center_vertical"
+            android:text="Loading Pokemon..."
+            android:textSize="10pt"/>
 
     </RelativeLayout>
 
