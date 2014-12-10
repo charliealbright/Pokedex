@@ -1,5 +1,6 @@
 package charlie.pokedex;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -69,7 +70,11 @@ public class MainActivity extends ActionBarActivity {
 
     public void onItemClick(int mPosition) {
         PokedexListItem temp = (PokedexListItem)pokedex.get(mPosition);
-        Toast.makeText(activity, temp.getPokemonName() + " clicked!", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, PokemonActivity.class);
+        intent.putExtra("name", temp.getPokemonName());
+        intent.putExtra("id", temp.getPokedexID());
+        startActivity(intent);
     }
 
     private class PokedexRequest extends AsyncTask<Void, Integer, String> {
