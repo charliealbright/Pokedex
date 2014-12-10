@@ -7,17 +7,17 @@
         android:id="@+id/pokedexID"
         android:layout_width="80dp"
         android:layout_height="50dp"
-        android:paddingLeft="10dp"
+        android:padding="10dp"
         android:text="#000"
-        android:textSize="12pt"
-        android:gravity="center_vertical"/>
+        android:textSize="10pt"
+        android:textColor="#666666"
+        android:gravity="center"/>
 
     <ImageView
         android:id="@+id/sprite"
-        android:layout_width="50dp"
+        android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
         android:src="@drawable/small_0"/>
 
     <TextView
@@ -30,6 +30,6 @@
         android:text="Pokemon"
         android:textSize="12pt"
         android:textColor="#FFFFFF"
-        android:gravity="center_vertical"/>
+        android:gravity="center"/>
 
 </RelativeLayout>

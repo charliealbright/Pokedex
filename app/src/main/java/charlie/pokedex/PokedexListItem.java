@@ -5,12 +5,13 @@ package charlie.pokedex;
  */
 public class PokedexListItem {
 
-
+    private int ID;
     private String pokemonName;
     private String pokedexID;
     private String pokedexLabel;
 
-    public PokedexListItem(String pokemonName, String pokedexID) {
+    public PokedexListItem(int id, String pokemonName, String pokedexID) {
+        ID = id;
         this.pokemonName = pokemonName;
         this.pokedexID = pokedexID;
         this.pokedexLabel = parseID(pokedexID);
@@ -26,6 +27,15 @@ public class PokedexListItem {
             result += id;
         }
         return result;
+    }
+
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getPokemonName() {

@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import org.apache.http.protocol.HTTP;
@@ -25,12 +27,15 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
 
 public class MainActivity extends ActionBarActivity {
 
     ListView listView;
+    RelativeLayout loadingScreen;
     CustomAdapter adapter;
     Resources resources;
     public MainActivity activity = null;
@@ -41,8 +46,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        loadingScreen = (RelativeLayout)findViewById(R.id.mainLoadingScreen);
         activity = this;
-        //setFakeData();
         getPokedex();
 
         resources = getResources();
@@ -51,13 +56,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void getPokedex() {
-        //show loading animation
+        loadingScreen.setVisibility(View.VISIBLE);
         new PokedexRequest().execute();
     }
 
     private void setFakeData() {
         for (int i = 1; i <= 10; i++) {
-            final PokedexListItem item = new PokedexListItem("Pokemon " + String.valueOf(i), String.valueOf(i));
+            final PokedexListItem item = new PokedexListItem(i, "Pokemon " + String.valueOf(i), String.valueOf(i));
             pokedex.add(item);
         }
     }
@@ -101,7 +106,7 @@ public class MainActivity extends ActionBarActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            //hide loading animation
+            loadingScreen.setVisibility(View.GONE);
             try {
                 JSONObject object = new JSONObject(result);
                 JSONArray pokemonArray = object.getJSONArray("pokemon");
@@ -111,12 +116,21 @@ public class MainActivity extends ActionBarActivity {
                     String url = pokemon.getString("resource_uri");
                     String[] tokens = url.split("/");
                     String id = tokens[3];
+                    String name = pokemon.getString("name");
+                    name = name.substring(0,1).toUpperCase() + name.substring(1);
                     int val = Integer.parseInt(id);
-                    if (val > 1 && val < 152) {
-                        PokedexListItem newItem = new PokedexListItem(pokemon.getString("name"), id);
+                    if (val > 0 && val < 152) {
+                        PokedexListItem newItem = new PokedexListItem(val, name, id);
                         pokedex.add(newItem);
                     }
                 }
+
+                Collections.sort(pokedex, new Comparator<PokedexListItem>() {
+                    @Override
+                    public int compare(PokedexListItem lhs, PokedexListItem rhs) {
+                        return (rhs.getID() <= lhs.getID() ? 1 : -1);
+                    }
+                });
 
                 adapter = new CustomAdapter(activity, pokedex, resources);
                 listView.setAdapter(adapter);
