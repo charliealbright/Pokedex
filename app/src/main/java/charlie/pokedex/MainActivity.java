@@ -11,6 +11,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.apache.http.protocol.HTTP;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -22,12 +25,14 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 
 public class MainActivity extends ActionBarActivity {
 
     ListView listView;
     CustomAdapter adapter;
+    Resources resources;
     public MainActivity activity = null;
     public ArrayList<PokedexListItem> pokedex = new ArrayList<>();
 
@@ -40,11 +45,9 @@ public class MainActivity extends ActionBarActivity {
         //setFakeData();
         getPokedex();
 
-        Resources resources = getResources();
+        resources = getResources();
         listView = (ListView)findViewById(R.id.pokedexListView);
 
-        adapter = new CustomAdapter(this, pokedex, resources);
-        listView.setAdapter(adapter);
     }
 
     private void getPokedex() {
@@ -99,7 +102,28 @@ public class MainActivity extends ActionBarActivity {
         @Override
         protected void onPostExecute(String result) {
             //hide loading animation
-            Log.d("WEB", result);
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONArray pokemonArray = object.getJSONArray("pokemon");
+
+                for(int i = 0; i < pokemonArray.length(); i++) {
+                    JSONObject pokemon = pokemonArray.getJSONObject(i);
+                    String url = pokemon.getString("resource_uri");
+                    String[] tokens = url.split("/");
+                    String id = tokens[3];
+                    int val = Integer.parseInt(id);
+                    if (val > 1 && val < 152) {
+                        PokedexListItem newItem = new PokedexListItem(pokemon.getString("name"), id);
+                        pokedex.add(newItem);
+                    }
+                }
+
+                adapter = new CustomAdapter(activity, pokedex, resources);
+                listView.setAdapter(adapter);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
