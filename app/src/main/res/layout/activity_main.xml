@@ -50,6 +50,7 @@
             android:layout_toRightOf="@id/loadingIcon"
             android:layout_toEndOf="@id/loadingIcon"
             android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:gravity="center_vertical"
             android:text="Loading Pokemon..."
             android:textSize="10pt"/>

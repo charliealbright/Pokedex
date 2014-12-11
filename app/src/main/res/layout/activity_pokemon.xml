@@ -9,10 +9,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             android:isScrollContainer="true">
 
             <ImageView
@@ -21,7 +21,190 @@
                 android:layout_height="200dp"
                 android:layout_marginTop="80dp"/>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/statsLabel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pokemonImage"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/section_header"
+                android:gravity="center"
+                android:text="Stats"
+                android:textSize="10pt"
+                android:textColor="#FFFFFF"/>
+
+            <RelativeLayout
+                android:id="@+id/statsWindow"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/statsLabel"
+                android:background="@drawable/section_body">
+
+                <TextView
+                    android:id="@+id/hpLabel"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:gravity="right"
+                    android:text="HP:"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/attackLabel"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/hpLabel"
+                    android:gravity="right"
+                    android:text="ATTACK:"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/defenseLabel"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/attackLabel"
+                    android:gravity="right"
+                    android:text="DEFENSE:"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/specialLabel"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/defenseLabel"
+                    android:gravity="right"
+                    android:text="SPECIAL:"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/speedLabel"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/specialLabel"
+                    android:gravity="right"
+                    android:text="SPEED:"
+                    android:textColor="#000000"/>
+
+                <TextView
+                    android:id="@+id/hpVal"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:text="000"
+                    android:textColor="#00BFFF"/>
+
+                <TextView
+                    android:id="@+id/attackVal"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/hpVal"
+                    android:text="000"
+                    android:textColor="#00BFFF"/>
+
+                <TextView
+                    android:id="@+id/defenseVal"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/attackVal"
+                    android:text="000"
+                    android:textColor="#00BFFF"/>
+
+                <TextView
+                    android:id="@+id/specialVal"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/defenseVal"
+                    android:text="000"
+                    android:textColor="#00BFFF"/>
+
+                <TextView
+                    android:id="@+id/speedVal"
+                    android:layout_width="75dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/specialVal"
+                    android:text="000"
+                    android:textColor="#00BFFF"/>
+
+                <ProgressBar
+                    android:id="@+id/hpBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:layout_toEndOf="@id/hpLabel"
+                    android:layout_toRightOf="@id/hpLabel"
+                    android:layout_toLeftOf="@id/hpVal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingTop="2dp"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:max="250"
+                    android:progress="45"/>
+
+                <ProgressBar
+                    android:id="@+id/attackBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:layout_toEndOf="@id/attackLabel"
+                    android:layout_toRightOf="@id/attackLabel"
+                    android:layout_toLeftOf="@id/attackVal"
+                    android:layout_below="@id/hpBar"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingTop="2dp"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:max="135"
+                    android:progress="45"/>
+
+                <ProgressBar
+                    android:id="@+id/defenseBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:layout_toEndOf="@id/defenseLabel"
+                    android:layout_toRightOf="@id/defenseLabel"
+                    android:layout_toLeftOf="@id/defenseVal"
+                    android:layout_below="@id/attackBar"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingTop="2dp"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:max="180"
+                    android:progress="45"/>
+
+                <ProgressBar
+                    android:id="@+id/specialBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:layout_toEndOf="@id/specialLabel"
+                    android:layout_toRightOf="@id/specialLabel"
+                    android:layout_toLeftOf="@id/specialVal"
+                    android:layout_below="@id/defenseBar"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingTop="2dp"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:max="140"
+                    android:progress="45"/>
+
+                <ProgressBar
+                    android:id="@+id/speedBar"
+                    android:layout_width="fill_parent"
+                    android:layout_height="20dp"
+                    android:layout_toEndOf="@id/speedLabel"
+                    android:layout_toRightOf="@id/speedLabel"
+                    android:layout_toLeftOf="@id/speedVal"
+                    android:layout_below="@id/specialBar"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:paddingTop="2dp"
+                    style="@android:style/Widget.Holo.Light.ProgressBar.Horizontal"
+                    android:max="155"
+                    android:progress="45"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
 
     </ScrollView>
 
@@ -67,7 +250,7 @@
         android:id="@+id/pokemonLoadingScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/navbar"
+        android:layout_marginTop="75dp"
         android:gravity="center"
         android:background="#66000000"
         android:visibility="gone">
@@ -81,9 +264,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:layout_toRightOf="@id/loadingIcon"
-            android:layout_toEndOf="@id/loadingIcon"
+            android:layout_toRightOf="@id/loadingIcon2"
+            android:layout_toEndOf="@id/loadingIcon2"
             android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:gravity="center_vertical"
             android:text="Loading Info..."
             android:textSize="10pt"/>
