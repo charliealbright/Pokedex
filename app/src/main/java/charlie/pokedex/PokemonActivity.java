@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 
 public class PokemonActivity extends ActionBarActivity {
@@ -53,6 +54,8 @@ public class PokemonActivity extends ActionBarActivity {
 
     //OTHER
     private String id;
+    private ArrayList<String> effective;
+    private ArrayList<String> weak;
     private ImageView pokemonImage;
     private RelativeLayout loadingScreen;
 
@@ -86,6 +89,9 @@ public class PokemonActivity extends ActionBarActivity {
         String name = intent.getStringExtra("name");
         id = intent.getStringExtra("id");
         String label = intent.getStringExtra("label");
+
+        effective = new ArrayList<>();
+        weak = new ArrayList<>();
 
         getPokemonData(id);
         nameBig.setText(name);
@@ -128,13 +134,8 @@ public class PokemonActivity extends ActionBarActivity {
         }
 
         @Override
-        protected void onProgressUpdate(Integer... params) {
-
-        }
-
-        @Override
         protected void onPostExecute(String result) {
-            loadingScreen.setVisibility(View.GONE);
+            ArrayList<String> typeArray = new ArrayList<>();
             pokemonImage.setImageResource(activity.getResources().getIdentifier("big_" + id, "drawable", "charlie.pokedex"));
             try {
                 JSONObject object = new JSONObject(result);
@@ -142,12 +143,21 @@ public class PokemonActivity extends ActionBarActivity {
                 if (types.length() == 1) {
                     JSONObject type = types.getJSONObject(0);
                     String typeName = type.getString("name");
+                    String uri = type.getString("resource_uri");
+                    String[] tokens = uri.split("/");
+                    typeArray.add(tokens[3]);
                     type1.setImageResource(activity.getResources().getIdentifier(typeName, "drawable", "charlie.pokedex"));
                 } else if (types.length() == 2) {
                     JSONObject typeOne = types.getJSONObject(0);
                     JSONObject typeTwo = types.getJSONObject(1);
                     String nameOne = typeOne.getString("name");
                     String nameTwo = typeTwo.getString("name");
+                    String uriOne = typeOne.getString("resource_uri");
+                    String uriTwo = typeTwo.getString("resource_uri");
+                    String[] tokensOne = uriOne.split("/");
+                    String[] tokensTwo = uriTwo.split("/");
+                    typeArray.add(tokensOne[4]);
+                    typeArray.add(tokensTwo[4]);
                     type1.setImageResource(activity.getResources().getIdentifier(nameOne, "drawable", "charlie.pokedex"));
                     type2.setImageResource(activity.getResources().getIdentifier(nameTwo, "drawable", "charlie.pokedex"));
                 }
@@ -168,6 +178,57 @@ public class PokemonActivity extends ActionBarActivity {
                 speedBar.setProgress(speed);
                 speedVal.setText(String.valueOf(speed));
 
+                for (int i = 0; i < typeArray.size(); i++) {
+                    new TypeRequest().execute(typeArray.get(i));
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private class TypeRequest extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            String result = "";
+            String id = params[0];
+
+            try {
+                URL url = new URL("http://pokeapi.co/api/v1/type/" + id + "/");
+                HttpURLConnection connection;
+                connection = (HttpURLConnection)url.openConnection();
+                connection.setReadTimeout(10000);
+                connection.setConnectTimeout(15000);
+
+                final int statusCode = connection.getResponseCode();
+                if (statusCode != HttpURLConnection.HTTP_OK) {
+                    Log.d("WEB", "The Request failed with status code " + statusCode + ".");
+                } else {
+                    InputStream inputStream = new BufferedInputStream(connection.getInputStream());
+                    result = getResponseText(inputStream);
+                }
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            loadingScreen.setVisibility(View.GONE);
+            try {
+                JSONObject object = new JSONObject(result);
+                JSONArray weak = object.getJSONArray("weakness");
+                JSONArray effective = object.getJSONArray("super_effective");
+
+                for (int i = 0; i < weak.length(); i++) {
+                    JSONObject temp = weak.getJSONObject(i);
+
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
