@@ -74,6 +74,7 @@ public class MainActivity extends ActionBarActivity {
         Intent intent = new Intent(this, PokemonActivity.class);
         intent.putExtra("name", temp.getPokemonName());
         intent.putExtra("id", temp.getPokedexID());
+        intent.putExtra("label", temp.getPokedexLabel());
         startActivity(intent);
     }
 
