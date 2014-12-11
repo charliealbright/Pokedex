@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,15 +31,31 @@ import java.net.URL;
 
 public class PokemonActivity extends ActionBarActivity {
 
+    private PokemonActivity activity;
+
+    //HEADER LAYOUT
     private TextView nameBig;
     private TextView idBig;
     private ImageView type1;
     private ImageView type2;
+
+    //BASE STATS LAYOUT
+    private ProgressBar hpBar;
+    private ProgressBar attackBar;
+    private ProgressBar defenseBar;
+    private ProgressBar specialBar;
+    private ProgressBar speedBar;
+    private TextView hpVal;
+    private TextView attackVal;
+    private TextView defenseVal;
+    private TextView specialVal;
+    private TextView speedVal;
+
+    //OTHER
+    private String id;
     private ImageView pokemonImage;
     private RelativeLayout loadingScreen;
-    private PokemonActivity activity;
 
-    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +70,17 @@ public class PokemonActivity extends ActionBarActivity {
         type2 = (ImageView)findViewById(R.id.type2);
         pokemonImage = (ImageView)findViewById(R.id.pokemonImage);
         loadingScreen = (RelativeLayout)findViewById(R.id.pokemonLoadingScreen);
+
+        hpBar = (ProgressBar)findViewById(R.id.hpBar);
+        attackBar = (ProgressBar)findViewById(R.id.attackBar);
+        defenseBar = (ProgressBar)findViewById(R.id.defenseBar);
+        specialBar = (ProgressBar)findViewById(R.id.specialBar);
+        speedBar = (ProgressBar)findViewById(R.id.speedBar);
+        hpVal = (TextView)findViewById(R.id.hpVal);
+        attackVal = (TextView)findViewById(R.id.attackVal);
+        defenseVal = (TextView)findViewById(R.id.defenseVal);
+        specialVal = (TextView)findViewById(R.id.specialVal);
+        speedVal = (TextView)findViewById(R.id.speedVal);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
@@ -123,6 +151,23 @@ public class PokemonActivity extends ActionBarActivity {
                     type1.setImageResource(activity.getResources().getIdentifier(nameOne, "drawable", "charlie.pokedex"));
                     type2.setImageResource(activity.getResources().getIdentifier(nameTwo, "drawable", "charlie.pokedex"));
                 }
+
+                int hp = object.getInt("hp");
+                hpBar.setProgress(hp);
+                hpVal.setText(String.valueOf(hp));
+                int attack = object.getInt("attack");
+                attackBar.setProgress(attack);
+                attackVal.setText(String.valueOf(attack));
+                int defense = object.getInt("defense");
+                defenseBar.setProgress(defense);
+                defenseVal.setText(String.valueOf(defense));
+                int special = object.getInt("sp_atk");
+                specialBar.setProgress(special);
+                specialVal.setText(String.valueOf(special));
+                int speed = object.getInt("speed");
+                speedBar.setProgress(speed);
+                speedVal.setText(String.valueOf(speed));
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
