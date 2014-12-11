@@ -1,0 +1,13 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="charlie.pokedex.AcknowledgementsActivity">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:text="This app uses the following 3rd party content:\n\nPokeAPI - The Pokemon RESTful API\nOriginal Pokemon Artwork by Ken Sugimori\nColored Sprites from video games Version X/Y\nCustom Type Medallions by Zekrom-9 on DeviantArt"/>
+
+</RelativeLayout>

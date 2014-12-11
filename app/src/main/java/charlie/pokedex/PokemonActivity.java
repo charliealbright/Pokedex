@@ -52,6 +52,22 @@ public class PokemonActivity extends ActionBarActivity {
     private TextView specialVal;
     private TextView speedVal;
 
+    //EFFECTIVE LAYOUT
+    private ImageView eff1;
+    private ImageView eff2;
+    private ImageView eff3;
+    private ImageView eff4;
+    private ImageView eff5;
+    private ArrayList<ImageView> effViews = new ArrayList<>();
+
+    //WEAK LAYOUT
+    private ImageView weak1;
+    private ImageView weak2;
+    private ImageView weak3;
+    private ImageView weak4;
+    private ImageView weak5;
+    private ArrayList<ImageView> weakViews = new ArrayList<>();
+
     //OTHER
     private String id;
     private ArrayList<String> effective;
@@ -84,6 +100,30 @@ public class PokemonActivity extends ActionBarActivity {
         defenseVal = (TextView)findViewById(R.id.defenseVal);
         specialVal = (TextView)findViewById(R.id.specialVal);
         speedVal = (TextView)findViewById(R.id.speedVal);
+
+        eff1 = (ImageView)findViewById(R.id.eff1);
+        eff2 = (ImageView)findViewById(R.id.eff2);
+        eff3 = (ImageView)findViewById(R.id.eff3);
+        eff4 = (ImageView)findViewById(R.id.eff4);
+        eff5 = (ImageView)findViewById(R.id.eff5);
+
+        effViews.add(eff1);
+        effViews.add(eff2);
+        effViews.add(eff3);
+        effViews.add(eff4);
+        effViews.add(eff5);
+
+        weak1 = (ImageView)findViewById(R.id.weak1);
+        weak2 = (ImageView)findViewById(R.id.weak2);
+        weak3 = (ImageView)findViewById(R.id.weak3);
+        weak4 = (ImageView)findViewById(R.id.weak4);
+        weak5 = (ImageView)findViewById(R.id.weak5);
+
+        weakViews.add(weak1);
+        weakViews.add(weak2);
+        weakViews.add(weak3);
+        weakViews.add(weak4);
+        weakViews.add(weak5);
 
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
@@ -145,7 +185,7 @@ public class PokemonActivity extends ActionBarActivity {
                     String typeName = type.getString("name");
                     String uri = type.getString("resource_uri");
                     String[] tokens = uri.split("/");
-                    typeArray.add(tokens[3]);
+                    typeArray.add(tokens[4]);
                     type1.setImageResource(activity.getResources().getIdentifier(typeName, "drawable", "charlie.pokedex"));
                 } else if (types.length() == 2) {
                     JSONObject typeOne = types.getJSONObject(0);
@@ -222,12 +262,51 @@ public class PokemonActivity extends ActionBarActivity {
             loadingScreen.setVisibility(View.GONE);
             try {
                 JSONObject object = new JSONObject(result);
-                JSONArray weak = object.getJSONArray("weakness");
-                JSONArray effective = object.getJSONArray("super_effective");
+                JSONArray weakArray = object.getJSONArray("weakness");
+                JSONArray effectiveArray = object.getJSONArray("super_effective");
 
-                for (int i = 0; i < weak.length(); i++) {
-                    JSONObject temp = weak.getJSONObject(i);
+                for (int i = 0; i < weakArray.length(); i++) {
+                    JSONObject temp = weakArray.getJSONObject(i);
+                    String type = temp.getString("name");
+                    if (!weak.contains(type) && !(type.equals("fairy") || type.equals("dark") || type.equals("steel"))) {
+                        weak.add(type);
+                    }
+                }
 
+                for (int i = 0; i < effectiveArray.length(); i++) {
+                    JSONObject temp = effectiveArray.getJSONObject(i);
+                    String type = temp.getString("name");
+                    if (!effective.contains(type) && !(type.equals("fairy") || type.equals("dark") || type.equals("steel"))) {
+                        effective.add(type);
+                    }
+                }
+
+                if (effective.size() > 5) {
+                    for (int i = 0; i < 5; i++) {
+                        String type = effective.get(i);
+                        ImageView temp = effViews.get(i);
+                        temp.setImageResource(activity.getResources().getIdentifier(type, "drawable", "charlie.pokedex"));
+                    }
+                } else {
+                    for (int i = 0; i < effective.size(); i++) {
+                        String type = effective.get(i);
+                        ImageView temp = effViews.get(i);
+                        temp.setImageResource(activity.getResources().getIdentifier(type, "drawable", "charlie.pokedex"));
+                    }
+                }
+
+                if (weak.size() > 5) {
+                    for (int i = 0; i < 5; i++) {
+                        String type = weak.get(i);
+                        ImageView temp = weakViews.get(i);
+                        temp.setImageResource(activity.getResources().getIdentifier(type, "drawable", "charlie.pokedex"));
+                    }
+                } else {
+                    for (int i = 0; i < weak.size(); i++) {
+                        String type = weak.get(i);
+                        ImageView temp = weakViews.get(i);
+                        temp.setImageResource(activity.getResources().getIdentifier(type, "drawable", "charlie.pokedex"));
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

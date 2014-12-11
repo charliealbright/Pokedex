@@ -86,7 +86,7 @@
 
                 <TextView
                     android:id="@+id/hpVal"
-                    android:layout_width="75dp"
+                    android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:text="000"
@@ -94,7 +94,7 @@
 
                 <TextView
                     android:id="@+id/attackVal"
-                    android:layout_width="75dp"
+                    android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/hpVal"
@@ -103,7 +103,7 @@
 
                 <TextView
                     android:id="@+id/defenseVal"
-                    android:layout_width="75dp"
+                    android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/attackVal"
@@ -112,7 +112,7 @@
 
                 <TextView
                     android:id="@+id/specialVal"
-                    android:layout_width="75dp"
+                    android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/defenseVal"
@@ -121,7 +121,7 @@
 
                 <TextView
                     android:id="@+id/speedVal"
-                    android:layout_width="75dp"
+                    android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/specialVal"
@@ -228,37 +228,27 @@
                     android:id="@+id/eff1"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/eff2"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/eff3"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/eff4"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/eff5"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
             </LinearLayout>
 
             <TextView
@@ -285,37 +275,27 @@
                     android:id="@+id/weak1"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/weak2"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/weak3"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/weak4"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
                 <ImageView
                     android:id="@+id/weak5"
                     android:layout_width="0dp"
                     android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:src="@drawable/grass"/>
-
+                    android:layout_weight="1"/>
             </LinearLayout>
 
         </RelativeLayout>
